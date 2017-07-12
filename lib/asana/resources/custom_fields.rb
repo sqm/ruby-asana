@@ -35,7 +35,6 @@ module Asana
         #
         # options - [Hash] the request I/O options.
         def find_by_id(client, id, options: {})
-
           self.new(parse(client.get("/custom_fields/#{id}", options: options)).first, client: client)
         end
 
@@ -44,8 +43,7 @@ module Asana
         # workspace - [Id] The workspace or organization to find custom field definitions in.
         # options - [Hash] the request I/O options.
         def find_by_workspace(client, workspace: required("workspace"), options: {})
-
-          Resource.new(parse(client.get("/workspaces/#{workspace}/custom_fields", options: options)).first, client: client)
+          Collection.new(parse(client.get("/workspaces/#{workspace}/custom_fields", options: options)), client: client)
         end
       end
 
